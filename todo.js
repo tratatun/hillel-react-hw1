@@ -47,7 +47,7 @@ export class TodoList {
         this.filter;
     }
 
-    render = () => {
+    render () {
         this.parentNode.replaceChildren();
         this.List.filter(todo =>
             !this.filter ||
@@ -58,17 +58,17 @@ export class TodoList {
         this.afterRenderEvent();
     }
 
-    filterList = filter => {
+    filterList (filter) {
         this.filter = filter;
         this.render();
     }
 
-    clearCompleted = () => {
+    clearCompleted () {
         this.List = this.List.filter(todo => !todo.checked);
         this.render();
     }
 
-    addTodo = title => {
+    addTodo (title) {
         const todo = new Todo(title);
 
         const removeFromTodoList = () => {
