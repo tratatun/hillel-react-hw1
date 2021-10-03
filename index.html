@@ -9,50 +9,28 @@
     <section class="todoapp">
       <header class="header">
         <h1>todos</h1>
-        <input class="new-todo" placeholder="What needs to be done?" />
+        <input class="new-todo" placeholder="What needs to be done?" id='new-todo' />
       </header>
       <section class="main">
         <input id="toggle-all" class="toggle-all" type="checkbox" />
         <label for="toggle-all">Mark all as complete</label>
-        <ul class="todo-list">
-          <li class="editing">
-            <div class="view">
-              <input class="toggle" type="checkbox" /><label>Todo 1</label
-              ><button class="destroy"></button>
-            </div>
-            <input type="text" class="edit" value="Todo 1" />
-          </li>
-          <li class="completed">
-            <div class="view">
-              <input class="toggle" type="checkbox" checked /><label
-                >Todo 2</label
-              ><button class="destroy"></button>
-            </div>
-            <input type="text" class="edit" value="Todo 2" />
-          </li>
-          <li class="">
-            <div class="view">
-              <input class="toggle" type="checkbox" /><label>Todo 3</label
-              ><button class="destroy"></button>
-            </div>
-            <input type="text" class="edit" value="Todo 3" />
-          </li>
+        <ul class="todo-list" id="todo-list">
         </ul>
       </section>
       <footer class="footer">
         <span class="todo-count">
-          <strong>0</strong>
+          <strong id="todo-count">0</strong>
           items left
         </span>
         <ul class="filters">
           <li>
-            <a href="/" class="selected">All</a>
+            <a href="#" class="selected" id='filter-all'>All</a>
           </li>
           <li>
-            <a href="/active">Active</a>
+            <a href="#" id='filter-active'>Active</a>
           </li>
           <li>
-            <a href="/completed">Completed</a>
+            <a href="#" id='filter-completed'>Completed</a>
           </li>
         </ul>
         <button class="clear-completed">Clear completed</button>
