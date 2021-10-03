@@ -1,7 +1,7 @@
 import { TodoList } from "./todo";
 
 // window.addEventListener('load', ()=>{
-(function (){
+// (function (){
     const todoListParent = document.getElementById('todo-list');
     const todoList = new TodoList(todoListParent);
 
@@ -51,6 +51,6 @@ import { TodoList } from "./todo";
     clearCompleted.addEventListener('click', ()=>{
         todoList.clearCompleted();
     });
-})();
+// })();
 // });
 
