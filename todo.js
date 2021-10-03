@@ -1,16 +1,5 @@
 export class Todo {
-    id;
-    checkbox;
-    title;
-    checked;
-    elem;
-    static List = [];
-    static parentNode = null;
-    static afterRenderEvent = () => {};
-    static filter;
-
     constructor (title) {
-        if(!Todo.parentNode) return;
         this.id = Date.now();
         this.title = title;
 
@@ -42,40 +31,57 @@ export class Todo {
         divView.appendChild(destroy);
 
         this.elem.appendChild(divView);
-
-        Todo.List.push(this);
-        Todo.render()
     }
 
-    static render = () => {
-        Todo.parentNode.replaceChildren();
-        Todo.List.filter(todo =>
-            !Todo.filter ||
-            typeof Todo.filter.checked === 'boolean' && Todo.filter.checked === todo.checked
-        ).forEach(todo => {
-            Todo.parentNode.appendChild(todo.elem);
-        });
-        Todo.afterRenderEvent();
-    }
-
-    static filterList = filter => {
-        Todo.filter = filter;
-        Todo.render();
-    }
-
-    static clearCompleted = () => {
-        Todo.List = Todo.List.filter(todo => !todo.checked);
-        Todo.render();
-    }
-
-    destroy () {
-        this.elem.remove();
-        Todo.List = Todo.List.filter(todo => todo.id !== this.id);
-        Todo.render();
-    }
 
     check () {
         this.checked = this.checkbox.checked;
-        Todo.render();
+    }
+}
+
+export class TodoList {
+    constructor (parentNode) {
+        this.List = [];
+        this.parentNode = parentNode;
+        this.afterRenderEvent = () => {};
+        this.filter;
+    }
+
+    render = () => {
+        this.parentNode.replaceChildren();
+        this.List.filter(todo =>
+            !this.filter ||
+            typeof this.filter.checked === 'boolean' && this.filter.checked === todo.checked
+        ).forEach(todo => {
+            this.parentNode.appendChild(todo.elem);
+        });
+        this.afterRenderEvent();
+    }
+
+    filterList = filter => {
+        this.filter = filter;
+        this.render();
+    }
+
+    clearCompleted = () => {
+        this.List = this.List.filter(todo => !todo.checked);
+        this.render();
+    }
+
+    addTodo = title => {
+        const todo = new Todo(title);
+
+        const removeFromTodoList = () => {
+            this.List = this.List.filter(t => todo.id !== t.id);
+            this.render();
+        };
+
+        todo.destroy = function() {
+            this.elem.remove();
+            removeFromTodoList();
+        };
+
+        this.List.push(todo);
+        this.render()
     }
 }
